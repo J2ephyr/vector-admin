@@ -4,6 +4,7 @@ name: vectoradmin
 
 networks:
   vector-admin:
+    name: vector-admin
     driver: bridge
 
 services:
@@ -12,7 +13,7 @@ services:
     ports:
       - 5433:5432
     volumes:
-      - ~/apps/postgres:/var/lib/postgresql/data
+      - ./data/postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: vectoradmin
       POSTGRES_PASSWORD: password
@@ -39,3 +40,5 @@ services:
       - vector-admin
     depends_on:
       - postgres
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
